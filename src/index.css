@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Pacifico&family=Sacramento&family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#FAF6F0] dark:bg-[#1A1612] text-[#2C221E] dark:text-[#F3EBE1] font-sans antialiased selection:bg-saffron-200 selection:text-saffron-900;
+  }
+}
+
+/* Explicit Cursive Calligraphy font class */
+.font-cursive-calligraphy {
+  font-family: 'Dancing Script', 'Great Vibes', 'Sacramento', 'Pacifico', cursive !important;
+}
+
+/* Glassmorphism utility classes */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(243, 139, 43, 0.15);
+}
+
+.dark .glass-panel {
+  background: rgba(30, 24, 18, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(243, 139, 43, 0.25);
+}
+
+.glass-card {
+  background: rgba(255, 249, 242, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(229, 191, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .glass-card {
+  background: rgba(37, 30, 23, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(243, 139, 43, 0.2);
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(243, 139, 43, 0.12);
+}
+
+/* Custom festive line-art background pattern */
+.festive-pattern {
+  background-image: radial-gradient(rgba(243, 139, 43, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.dark .festive-pattern {
+  background-image: radial-gradient(rgba(243, 139, 43, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(244, 236, 225, 0.5);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgba(26, 22, 18, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #F38B2B;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D96F14;
+}
+
+/* Gold Gradient Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #D96F14 0%, #E5BF00 50%, #B89900 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .gold-gradient-text {
+  background: linear-gradient(135deg, #FFAF60 0%, #FFDC19 50%, #FFE847 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
