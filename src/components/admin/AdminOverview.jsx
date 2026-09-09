@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDataStore } from '../../store/useDataStore';
-import { TrendingUp, Wallet, Receipt, Award, ArrowUpRight, ArrowDownLeft, ShieldCheck, Download, PlusCircle, Layers, Settings } from 'lucide-react';
+import API from '../../services/api';
+import { TrendingUp, Wallet, Receipt, Award, ArrowUpRight, ArrowDownLeft, ShieldCheck, Download, PlusCircle, Layers, Settings, FileDown } from 'lucide-react';
 
 export const AdminOverview = ({ onNavigateTab }) => {
   const { summary, contributions, expenses, settings, festivalYear } = useDataStore();
@@ -17,6 +18,25 @@ export const AdminOverview = ({ onNavigateTab }) => {
 
   const recentContribs = (contributions || []).slice(0, 5);
   const recentExps = (expenses || []).slice(0, 5);
+
+  const handleExportFullReport = async () => {
+    try {
+      const year = festivalYear || settings?.festivalYear || 2026;
+      const response = await API.get(`/public/export-csv?festivalYear=${year}`, { responseType: 'blob' });
+      const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `Ganesh_Utsav_${year}_Financial_Report.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to export full financial report');
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -52,15 +72,14 @@ export const AdminOverview = ({ onNavigateTab }) => {
             <span>+ Log Expense</span>
           </button>
 
-          <a
-            href={`/api/public/export-csv?festivalYear=${festivalYear}`}
-            target="_blank"
-            rel="noreferrer"
-            className="px-4 py-2.5 rounded-2xl bg-cream-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 font-semibold text-xs border border-saffron-300/60 flex items-center space-x-1.5"
+          <button
+            onClick={handleExportFullReport}
+            className="px-4 py-2.5 rounded-2xl bg-cream-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 font-semibold text-xs border border-saffron-300/60 hover:bg-cream-200 transition-colors flex items-center space-x-1.5 cursor-pointer"
+            title="Export full financial statement CSV"
           >
-            <Download className="w-4 h-4" />
-            <span>Export CSV</span>
-          </a>
+            <FileDown className="w-4 h-4 text-saffron-700 dark:text-gold-400" />
+            <span>Export Full CSV</span>
+          </button>
         </div>
       </div>
 

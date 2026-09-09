@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useDataStore } from '../../store/useDataStore';
-import { Upload, Trash2, Receipt, Image as ImageIcon, Pencil, X } from 'lucide-react';
+import API from '../../services/api';
+import { Upload, Trash2, Receipt, Image as ImageIcon, Pencil, X, FileDown } from 'lucide-react';
 
 export const ExpensesManager = () => {
-  const { expenses, addExpense, updateExpense, deleteExpense } = useDataStore();
+  const { expenses, addExpense, updateExpense, deleteExpense, settings } = useDataStore();
   const [editingExpense, setEditingExpense] = useState(null);
 
   const [form, setForm] = useState({
@@ -69,13 +70,41 @@ export const ExpensesManager = () => {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h3 className="font-serif font-bold text-xl text-stone-900 dark:text-cream-50">
-          Expense & Receipt Photo Manager
-        </h3>
-        <p className="text-xs text-stone-500">
-          Upload paper bill receipts directly to Cloudinary for transparency.
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h3 className="font-serif font-bold text-xl text-stone-900 dark:text-cream-50">
+            Expense & Receipt Photo Manager
+          </h3>
+          <p className="text-xs text-stone-500">
+            Upload paper bill receipts directly to Cloudinary for transparency.
+          </p>
+        </div>
+
+        <button
+          onClick={async () => {
+            try {
+              const year = settings?.festivalYear || 2026;
+              const response = await API.get(`/public/export-expenses?festivalYear=${year}`, { responseType: 'blob' });
+              const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
+              const url = window.URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = url;
+              link.setAttribute('download', `Expenses_${year}.csv`);
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+              window.URL.revokeObjectURL(url);
+            } catch (err) {
+              console.error(err);
+              alert('Failed to export expenses CSV');
+            }
+          }}
+          className="px-4 py-2 rounded-xl bg-amber-100 dark:bg-stone-800 text-amber-900 dark:text-amber-300 font-semibold text-xs border border-amber-300/60 hover:bg-amber-200 transition-colors flex items-center space-x-1.5 self-start"
+          title="Export all logged expenses to CSV spreadsheet"
+        >
+          <FileDown className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+          <span>Export All Expenses (CSV)</span>
+        </button>
       </div>
 
       {msg && (

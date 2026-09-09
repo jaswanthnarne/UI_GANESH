@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDataStore } from '../../store/useDataStore';
 import { useAuthStore } from '../../store/useAuthStore';
 import { ShareableReceiptModal } from '../ShareableReceiptModal';
-import { Plus, Trash2, Layers, Download, Share2, Search, CheckCircle2, Pencil, X } from 'lucide-react';
+import API from '../../services/api';
+import { Plus, Trash2, Layers, Download, Share2, Search, CheckCircle2, Pencil, X, FileDown } from 'lucide-react';
 
 export const FastContributionEntry = () => {
   const { user } = useAuthStore();
@@ -121,13 +122,41 @@ export const FastContributionEntry = () => {
           </p>
         </div>
 
-        <button
-          onClick={() => setIsBulkMode(!isBulkMode)}
-          className="px-4 py-2 rounded-xl bg-saffron-100 dark:bg-stone-800 text-saffron-900 dark:text-gold-300 font-semibold text-xs border border-saffron-300/60 transition-colors flex items-center space-x-1.5 self-start"
-        >
-          <Layers className="w-4 h-4" />
-          <span>{isBulkMode ? 'Switch to Single Entry' : 'Switch to Bulk Entry Mode'}</span>
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            onClick={async () => {
+              try {
+                const year = settings?.festivalYear || 2026;
+                const response = await API.get(`/public/export-contributions?festivalYear=${year}`, { responseType: 'blob' });
+                const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `Contributions_${year}.csv`);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+              } catch (err) {
+                console.error(err);
+                alert('Failed to export contributions CSV');
+              }
+            }}
+            className="px-4 py-2 rounded-xl bg-emerald-100 dark:bg-stone-800 text-emerald-900 dark:text-emerald-300 font-semibold text-xs border border-emerald-300/60 hover:bg-emerald-200 transition-colors flex items-center space-x-1.5"
+            title="Export all contributions to CSV spreadsheet"
+          >
+            <FileDown className="w-4 h-4 text-emerald-700 dark:text-emerald-400" />
+            <span>Export All Contributions (CSV)</span>
+          </button>
+
+          <button
+            onClick={() => setIsBulkMode(!isBulkMode)}
+            className="px-4 py-2 rounded-xl bg-saffron-100 dark:bg-stone-800 text-saffron-900 dark:text-gold-300 font-semibold text-xs border border-saffron-300/60 hover:bg-saffron-200 transition-colors flex items-center space-x-1.5"
+          >
+            <Layers className="w-4 h-4" />
+            <span>{isBulkMode ? 'Switch to Single Entry' : 'Switch to Bulk Entry Mode'}</span>
+          </button>
+        </div>
       </div>
 
       {msg && (
