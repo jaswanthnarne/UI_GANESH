@@ -46,7 +46,7 @@ export const Footer = ({ settings }) => {
               Offline Contribution UPI Info
             </h4>
             <p className="text-[11px] text-stone-500 dark:text-stone-400 mb-3">
-              Contributions are collected offline via cash or UPI. Payments are logged by our authorized treasurer into MongoDB Atlas.
+              Contributions are collected offline via cash or UPI. Payments are logged and verified by our authorized committee treasurers.
             </p>
             <div className="p-3 rounded-xl bg-saffron-50 dark:bg-stone-800 border border-saffron-200 dark:border-stone-700 text-xs">
               <p className="font-semibold text-stone-700 dark:text-stone-300">UPI ID: <span className="text-saffron-700 dark:text-gold-400 font-mono">{upiId}</span></p>
@@ -64,11 +64,11 @@ export const Footer = ({ settings }) => {
             <ul className="text-xs text-stone-600 dark:text-stone-400 space-y-2">
               <li className="flex items-center">
                 <Shield className="w-3.5 h-3.5 mr-2 text-emerald-500" />
-                MongoDB Atlas Backed Database Records
+                Verified & Transparent Financial Ledger
               </li>
               <li className="flex items-center">
                 <Shield className="w-3.5 h-3.5 mr-2 text-emerald-500" />
-                Cloudinary Receipt Photo Uploads
+                Digital Verified Bill & Receipt Records
               </li>
               <li className="flex items-center">
                 <Shield className="w-3.5 h-3.5 mr-2 text-emerald-500" />

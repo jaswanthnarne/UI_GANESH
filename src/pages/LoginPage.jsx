@@ -79,7 +79,7 @@ export const LoginPage = () => {
                     Committee & Treasurer Sign In
                   </h2>
                   <p className="text-xs text-gold-100 mt-2 leading-relaxed">
-                    Access the executive administration dashboard to log contributions, manage expense receipt uploads to Cloudinary, and update festival settings.
+                    Access the executive administration dashboard to log contributions, manage verified expense receipts, and update festival settings.
                   </p>
                 </div>
               </div>
@@ -87,11 +87,11 @@ export const LoginPage = () => {
               <div className="space-y-3 text-xs bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
                 <div className="flex items-center space-x-2">
                   <CheckCircle2 className="w-4 h-4 text-gold-200 shrink-0" />
-                  <span>MongoDB Atlas Backed Ledger DB</span>
+                  <span>Secure Real-Time Ledger Records</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle2 className="w-4 h-4 text-gold-200 shrink-0" />
-                  <span>Cloudinary Receipt Image Uploads</span>
+                  <span>Verified Digital Receipt Attachments</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle2 className="w-4 h-4 text-gold-200 shrink-0" />

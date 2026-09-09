@@ -37,7 +37,7 @@ export const GalleryManager = () => {
       formData.append('image', imageFile);
 
       await addGalleryImage(formData);
-      setMsg('Photo uploaded to Cloudinary gallery successfully!');
+      setMsg('Photo uploaded to gallery successfully!');
       setCaption('');
       setImageFile(null);
       setPreviewUrl('');
@@ -53,10 +53,10 @@ export const GalleryManager = () => {
       <div>
         <h3 className="font-serif font-bold text-xl text-stone-900 dark:text-cream-50 flex items-center">
           <Camera className="w-5 h-5 mr-2 text-saffron-600" />
-          Cloudinary Photo Gallery Manager
+          Celebration Photo Gallery Manager
         </h3>
         <p className="text-xs text-stone-500">
-          Upload festival photos (Idol, Decor, Pooja, Visarjan) to Cloudinary.
+          Upload festival photos (Idol, Decor, Pooja, Visarjan) to showcase on the community portal.
         </p>
       </div>
 
@@ -118,7 +118,7 @@ export const GalleryManager = () => {
           disabled={loading}
           className="w-full py-3 rounded-2xl bg-saffron-500 hover:bg-saffron-600 text-white font-bold text-xs shadow-md"
         >
-          {loading ? 'Uploading to Cloudinary...' : '+ Upload Photo to Gallery'}
+          {loading ? 'Uploading photo...' : '+ Upload Photo to Gallery'}
         </button>
       </form>
 

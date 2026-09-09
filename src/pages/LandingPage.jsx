@@ -22,7 +22,7 @@ export const LandingPage = ({ settings, announcements, events, gallery }) => {
         </div>
       </div>
 
-      {/* 4. Cloudinary Photo Highlights */}
+      {/* 4. Celebration Photo Highlights */}
       <div id="gallery-section">
         <PhotoGallery gallery={gallery} />
       </div>

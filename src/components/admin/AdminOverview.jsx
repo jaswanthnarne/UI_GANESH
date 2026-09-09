@@ -133,7 +133,7 @@ export const AdminOverview = ({ onNavigateTab }) => {
           </div>
 
           <div className="mt-4 pt-3 border-t border-saffron-200/50 flex items-center justify-between text-xs">
-            <span className="text-stone-500">Cloudinary Receipt Uploads</span>
+            <span className="text-stone-500">Verified Bill Receipts</span>
             <button onClick={() => onNavigateTab('expenses')} className="text-amber-600 font-bold hover:underline">
               Manage Bills →
             </button>

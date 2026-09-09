@@ -46,7 +46,7 @@ export const FastContributionEntry = () => {
       setLoading(true);
       setMsg('');
       await addContribution(singleForm);
-      setMsg('Contribution logged successfully in MongoDB!');
+      setMsg('Contribution logged successfully!');
       setSingleForm({
         flatNumber: '',
         contributorName: '',
@@ -76,7 +76,7 @@ export const FastContributionEntry = () => {
       setLoading(true);
       setMsg('');
       const res = await addBulkContributions(validRows);
-      setMsg(res.message || 'Bulk entries saved to MongoDB!');
+      setMsg(res.message || 'Bulk entries saved successfully!');
       setBulkRows([
         { flatNumber: '', contributorName: '', amount: '', mode: 'upi' },
         { flatNumber: '', contributorName: '', amount: '', mode: 'upi' },

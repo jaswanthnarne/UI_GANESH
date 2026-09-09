@@ -58,7 +58,7 @@ export const BudgetPlanner = () => {
           Budget Allocation & Target Goal Planner
         </h3>
         <p className="text-xs text-stone-500">
-          Enter planned expense items below. The dynamic total sum can be set directly as your community's official target goal in MongoDB!
+          Enter planned expense items below. The dynamic total sum can be set directly as your community's official target goal!
         </p>
       </div>
 

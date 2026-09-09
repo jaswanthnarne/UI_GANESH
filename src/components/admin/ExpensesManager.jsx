@@ -76,7 +76,7 @@ export const ExpensesManager = () => {
             Expense & Receipt Photo Manager
           </h3>
           <p className="text-xs text-stone-500">
-            Upload paper bill receipts directly to Cloudinary for transparency.
+            Upload paper bill receipts and vendor invoices for verified transparency.
           </p>
         </div>
 
@@ -185,7 +185,7 @@ export const ExpensesManager = () => {
         {/* Receipt Image Upload Dropzone */}
         <div className="pt-2">
           <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-            Receipt Image Photo (Cloudinary Upload)
+            Receipt Image Photo / Bill Voucher
           </label>
           
           <div className="flex items-center space-x-4">

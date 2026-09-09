@@ -21,7 +21,7 @@ export const PhotoGallery = ({ gallery }) => {
             Celebration Photo Gallery
           </h2>
           <p className="text-xs sm:text-sm text-stone-500 dark:text-stone-400 mt-1">
-            Cloudinary powered photos of Ganesh Idol, Mandap decorations & Aarti moments.
+            Photo highlights of Ganesh Idol, Mandap decorations & Aarti moments.
           </p>
         </div>
 
