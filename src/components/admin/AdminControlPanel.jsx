@@ -40,20 +40,23 @@ export const AdminControlPanel = () => {
   const { settings, festivalYear } = useDataStore();
   const { isDarkMode, toggleDarkMode } = useThemeStore();
 
-  const [activeTab, setActiveTab] = useState('overview'); // Default: Executive Dashboard
+  const isVolunteer = user?.role === 'volunteer';
+  const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
+
+  const [activeTab, setActiveTab] = useState(isVolunteer ? 'contributions' : 'overview'); // Volunteer defaults to contributions
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const sidebarNavItems = [
-    { id: 'overview', label: 'Executive Dashboard', icon: LayoutDashboard },
+    { id: 'overview', label: 'Executive Dashboard', icon: LayoutDashboard, adminOnly: true },
     { id: 'contributions', label: 'Collected Funds', icon: DollarSign, badge: 'Ledger' },
-    { id: 'expenses', label: 'Expenses & Receipts', icon: Receipt, badge: 'Bills' },
-    { id: 'budget', label: 'Budget Planner', icon: Wallet },
-    { id: 'settings', label: 'Committee Settings', icon: Settings },
-    { id: 'users', label: 'User & Volunteer Logins', icon: Users },
-    { id: 'events', label: 'Events & Schedules', icon: Calendar },
-    { id: 'announcements', label: 'Noticeboard', icon: Megaphone },
-    { id: 'gallery', label: 'Photo Gallery', icon: Camera, badge: 'Cloud' },
-  ];
+    { id: 'expenses', label: 'Expenses & Receipts', icon: Receipt, badge: 'Bills', adminOnly: true },
+    { id: 'budget', label: 'Budget Planner', icon: Wallet, adminOnly: true },
+    { id: 'settings', label: 'Committee Settings', icon: Settings, adminOnly: true },
+    { id: 'users', label: 'User & Volunteer Logins', icon: Users, adminOnly: true },
+    { id: 'events', label: 'Events & Schedules', icon: Calendar, adminOnly: true },
+    { id: 'announcements', label: 'Noticeboard', icon: Megaphone, adminOnly: true },
+    { id: 'gallery', label: 'Photo Gallery', icon: Camera, badge: 'Cloud', adminOnly: true },
+  ].filter((item) => !isVolunteer || !item.adminOnly);
 
   const committeeName = settings?.committeeName || 'Ganesh Utsav Committee';
 
@@ -188,7 +191,10 @@ export const AdminControlPanel = () => {
               <div className="w-6 h-6 rounded-full bg-saffron-500 text-white font-bold flex items-center justify-center text-[10px]">
                 {user?.name ? user.name[0].toUpperCase() : 'A'}
               </div>
-              <span className="font-semibold text-stone-800 dark:text-stone-200">{user?.name || 'Treasurer'}</span>
+              <div className="flex flex-col">
+                <span className="font-semibold text-stone-800 dark:text-stone-200 leading-none">{user?.name || 'Treasurer'}</span>
+                <span className="text-[9px] uppercase font-extrabold text-saffron-600 dark:text-gold-400 mt-0.5">{user?.role || 'admin'}</span>
+              </div>
             </div>
 
             <button
@@ -213,15 +219,15 @@ export const AdminControlPanel = () => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
           >
-            {activeTab === 'overview' && <AdminOverview onNavigateTab={setActiveTab} />}
+            {activeTab === 'overview' && isAdmin && <AdminOverview onNavigateTab={setActiveTab} />}
             {activeTab === 'contributions' && <FastContributionEntry />}
-            {activeTab === 'expenses' && <ExpensesManager />}
-            {activeTab === 'budget' && <BudgetPlanner />}
-            {activeTab === 'settings' && <SettingsManager />}
-            {activeTab === 'users' && <UserAccountsManager />}
-            {activeTab === 'events' && <EventsManager />}
-            {activeTab === 'announcements' && <AnnouncementsManager />}
-            {activeTab === 'gallery' && <GalleryManager />}
+            {activeTab === 'expenses' && isAdmin && <ExpensesManager />}
+            {activeTab === 'budget' && isAdmin && <BudgetPlanner />}
+            {activeTab === 'settings' && isAdmin && <SettingsManager />}
+            {activeTab === 'users' && isAdmin && <UserAccountsManager />}
+            {activeTab === 'events' && isAdmin && <EventsManager />}
+            {activeTab === 'announcements' && isAdmin && <AnnouncementsManager />}
+            {activeTab === 'gallery' && isAdmin && <GalleryManager />}
           </motion.div>
         </AnimatePresence>
 

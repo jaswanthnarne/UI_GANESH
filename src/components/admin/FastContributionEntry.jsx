@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useDataStore } from '../../store/useDataStore';
+import { useAuthStore } from '../../store/useAuthStore';
 import { ShareableReceiptModal } from '../ShareableReceiptModal';
 import { Plus, Trash2, Layers, Download, Share2, Search, CheckCircle2, Pencil, X } from 'lucide-react';
 
 export const FastContributionEntry = () => {
+  const { user } = useAuthStore();
+  const isAdmin = user?.role === 'admin' || user?.role === 'super_admin';
   const { contributions, addContribution, addBulkContributions, updateContribution, deleteContribution, settings } = useDataStore();
   const [isBulkMode, setIsBulkMode] = useState(false);
   const [selectedReceipt, setSelectedReceipt] = useState(null);
@@ -353,21 +356,25 @@ export const FastContributionEntry = () => {
                   <span>Receipt PDF</span>
                 </button>
 
-                <button
-                  onClick={() => setEditingContribution({ ...c })}
-                  className="p-1.5 rounded-lg text-stone-400 hover:text-amber-600 hover:bg-amber-50"
-                  title="Edit Contribution"
-                >
-                  <Pencil className="w-4 h-4" />
-                </button>
+                {isAdmin && (
+                  <>
+                    <button
+                      onClick={() => setEditingContribution({ ...c })}
+                      className="p-1.5 rounded-lg text-stone-400 hover:text-amber-600 hover:bg-amber-50"
+                      title="Edit Contribution"
+                    >
+                      <Pencil className="w-4 h-4" />
+                    </button>
 
-                <button
-                  onClick={() => deleteContribution(c._id)}
-                  className="p-1.5 rounded-lg text-stone-400 hover:text-red-600 hover:bg-red-50"
-                  title="Delete Entry"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                    <button
+                      onClick={() => deleteContribution(c._id)}
+                      className="p-1.5 rounded-lg text-stone-400 hover:text-red-600 hover:bg-red-50"
+                      title="Delete Entry"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           ))}
