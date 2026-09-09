@@ -51,11 +51,6 @@ export const LoginPage = () => {
     }
   };
 
-  const handleAutoFillDemo = () => {
-    setEmail('admin@ganeshtracker.org');
-    setPassword('Admin@Ganesh2026');
-  };
-
   return (
     <div className="min-h-screen flex flex-col justify-between">
       <div>
@@ -132,26 +127,8 @@ export const LoginPage = () => {
                   </div>
                 )}
 
-                {/* Quick Demo Credentials Autofill Helper */}
-                {!isForgot && (
-                  <div
-                    onClick={handleAutoFillDemo}
-                    className="mb-5 p-3.5 rounded-2xl bg-saffron-50 dark:bg-stone-800 border border-saffron-200 dark:border-stone-700 cursor-pointer hover:bg-saffron-100/70 transition-colors text-xs shadow-sm"
-                    title="Click to auto-fill default admin credentials"
-                  >
-                    <div className="flex items-center justify-between font-bold text-saffron-900 dark:text-gold-300 mb-1">
-                      <span className="flex items-center">
-                        <Key className="w-3.5 h-3.5 mr-1 text-saffron-600" />
-                        Default Admin Credentials (Click to Auto-Fill)
-                      </span>
-                    </div>
-                    <p className="text-stone-600 dark:text-stone-300 text-[11px]">Email: <strong className="text-saffron-800 dark:text-gold-400">admin@ganeshtracker.org</strong></p>
-                    <p className="text-stone-600 dark:text-stone-300 text-[11px]">Password: <strong className="text-saffron-800 dark:text-gold-400">Admin@Ganesh2026</strong></p>
-                  </div>
-                )}
-
                 {!isForgot ? (
-                  <form onSubmit={handleLoginSubmit} className="space-y-4 text-xs">
+                  <form onSubmit={handleLoginSubmit} autoComplete="off" className="space-y-4 text-xs">
                     <div>
                       <label className="block text-stone-600 dark:text-stone-300 font-semibold mb-1">Email Address</label>
                       <div className="relative">
@@ -159,7 +136,8 @@ export const LoginPage = () => {
                         <input
                           type="email"
                           required
-                          placeholder="admin@ganeshtracker.org"
+                          autoComplete="off"
+                          placeholder="Enter your email address"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white dark:bg-stone-800 border border-saffron-200 dark:border-stone-700 focus:ring-2 focus:ring-saffron-500 focus:outline-none"
@@ -183,6 +161,7 @@ export const LoginPage = () => {
                         <input
                           type="password"
                           required
+                          autoComplete="new-password"
                           placeholder="••••••••"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
@@ -201,7 +180,7 @@ export const LoginPage = () => {
                     </button>
                   </form>
                 ) : (
-                  <form onSubmit={handleForgotSubmit} className="space-y-4 text-xs">
+                  <form onSubmit={handleForgotSubmit} autoComplete="off" className="space-y-4 text-xs">
                     <div>
                       <label className="block text-stone-600 dark:text-stone-300 font-semibold mb-1">Registered Email Address</label>
                       <div className="relative">
@@ -209,7 +188,8 @@ export const LoginPage = () => {
                         <input
                           type="email"
                           required
-                          placeholder="admin@ganeshtracker.org"
+                          autoComplete="off"
+                          placeholder="Enter registered email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white dark:bg-stone-800 border border-saffron-200 dark:border-stone-700 focus:ring-2 focus:ring-saffron-500 focus:outline-none"

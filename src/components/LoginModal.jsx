@@ -88,7 +88,7 @@ export const LoginModal = ({ isOpen, onClose }) => {
         )}
 
         {tab === 'login' ? (
-          <form onSubmit={handleLoginSubmit} className="space-y-4 text-xs">
+          <form onSubmit={handleLoginSubmit} autoComplete="off" className="space-y-4 text-xs">
             <div>
               <label className="block text-stone-600 dark:text-stone-300 font-semibold mb-1">Email Address</label>
               <div className="relative">
@@ -96,7 +96,8 @@ export const LoginModal = ({ isOpen, onClose }) => {
                 <input
                   type="email"
                   required
-                  placeholder="admin@ganeshtracker.org"
+                  autoComplete="off"
+                  placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white dark:bg-stone-800 border border-saffron-200 dark:border-stone-700 focus:outline-none focus:ring-2 focus:ring-saffron-500"
@@ -120,6 +121,7 @@ export const LoginModal = ({ isOpen, onClose }) => {
                 <input
                   type="password"
                   required
+                  autoComplete="new-password"
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -138,7 +140,7 @@ export const LoginModal = ({ isOpen, onClose }) => {
             </button>
           </form>
         ) : (
-          <form onSubmit={handleForgotSubmit} className="space-y-4 text-xs">
+          <form onSubmit={handleForgotSubmit} autoComplete="off" className="space-y-4 text-xs">
             <div>
               <label className="block text-stone-600 dark:text-stone-300 font-semibold mb-1">Registered Account Email</label>
               <div className="relative">
@@ -146,7 +148,8 @@ export const LoginModal = ({ isOpen, onClose }) => {
                 <input
                   type="email"
                   required
-                  placeholder="admin@ganeshtracker.org"
+                  autoComplete="off"
+                  placeholder="Enter registered email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white dark:bg-stone-800 border border-saffron-200 dark:border-stone-700 focus:outline-none focus:ring-2 focus:ring-saffron-500"
