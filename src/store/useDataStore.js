@@ -36,14 +36,15 @@ export const useDataStore = create((set, get) => ({
         API.get(`/gallery?festivalYear=${year}`),
       ]);
 
+      const summaryData = summaryRes.data?.data;
       set({
-        summary: summaryRes.data.data,
-        settings: summaryRes.data.data.settings,
-        contributions: contribRes.data.contributions || [],
-        expenses: expenseRes.data.expenses || [],
-        announcements: annRes.data.announcements || [],
-        events: eventRes.data.events || [],
-        gallery: galleryRes.data.images || [],
+        summary: summaryData || null,
+        settings: summaryData?.settings || null,
+        contributions: contribRes.data?.contributions || [],
+        expenses: expenseRes.data?.expenses || [],
+        announcements: annRes.data?.announcements || [],
+        events: eventRes.data?.events || [],
+        gallery: galleryRes.data?.images || [],
         loading: false,
       });
     } catch (err) {
